@@ -110,6 +110,7 @@ const DEFAULTS = {
   show_bms_temp: true,
   show_total_pv: true,
   show_mode: true,
+  show_battery: true,
   title: 'Solar Flow',
   // ── Économies & Tarification ──
   show_savings:      true,
@@ -1547,6 +1548,7 @@ function buildCardHTML(cfg) {
   const showEnd     = c.show_endurance;
   const showSavings = c.show_savings !== false;
   const showCells= c.show_cells;
+  const showBattery = c.show_battery !== false;
 
   return `
   <div class="sfc-root" id="sfcRoot" style="
@@ -2014,7 +2016,7 @@ function buildCardHTML(cfg) {
         </div>` : ''}
 
         <!-- ── BATTERIE avec niveau liquide ── -->
-        <div class="sfc-img-node node-battery" id="sfcNodeBatt">
+        ${showBattery ? `<div class="sfc-img-node node-battery" id="sfcNodeBatt" style="display:flex">` : `<div class="sfc-img-node node-battery" id="sfcNodeBatt" style="display:none">`}
           <div class="sfc-batt-wrapper" id="sfcBattWrapper">
             <!-- Zone liquide calibrée à l'intérieur du cylindre -->
             <div class="sfc-batt-liquid-wrap">
